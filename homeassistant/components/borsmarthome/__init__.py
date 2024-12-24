@@ -1,12 +1,15 @@
 """The BorSmartHome integration."""
 
-from __future__ import annotations
+import logging
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_API_TOKEN, CONF_HOST, Platform
 from homeassistant.core import HomeAssistant
 
 from . import hub
+
+_LOGGER = logging.getLogger(__name__)
+
 
 PLATFORMS: list[Platform] = [Platform.BUTTON, Platform.COVER]
 
@@ -20,7 +23,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: HubConfigEntry) -> bool:
         hass, entry.data[CONF_HOST], entry.data[CONF_API_TOKEN]
     )
 
-    await avehub.async_load_entities()
+    try:
+        await avehub.async_load_entities()
+    except Exception as e:
+        _LOGGER.error("Failed to load entities: %s", e)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
