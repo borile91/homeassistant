@@ -151,7 +151,7 @@ class TapparellaEntity(CoverEntity):
                         self.current_cover_position - perc, 0
                     )
                 elif self.is_opening:
-                    perc = 100 / self._roller.total_up_time
+                    perc = round(100 / self._roller.total_up_time)
                     self.current_cover_position = min(
                         self.current_cover_position + perc, 100
                     )
