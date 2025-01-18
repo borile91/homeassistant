@@ -1,0 +1,8 @@
+{
+    "name": "BorSmartHome",
+    "content_in_root": false,
+    "render_readme": true,
+    "domains": ["BorSmartHome"],
+    "country": "IT",
+    "iot_class": "Local Polling"
+}
